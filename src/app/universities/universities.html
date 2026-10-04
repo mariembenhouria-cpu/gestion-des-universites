@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+
+        <thead>
+          <tr>
+            <th colspan="6">Liste de Universités</th>
+          </tr>
+
+          @if (universities?.length != 0) {
+            <tr>
+              <th>N°</th>
+              <th>ID Université</th>
+              <th>Nom Université</th>
+              <th>Ville Université</th>
+              <th>Nombre des étudiants</th>
+              <th>Date de Création</th>
+            </tr>
+          }
+        </thead>
+
+        <tbody>
+
+          @for ( universite of universities; track universite.iduniversite; let index = $index;let nbr=$count;let last = $last) {
+            <tr>
+              <td>{{ index + 1 }}</td>
+              <td>{{ universite.iduniversite }}</td>
+              <td>{{ universite.nomuniversite }}</td>
+              <td>{{ universite.villeuniversite }}</td>
+              <td>{{ universite.nombre_etudiants }}</td>
+              <td>{{ universite.dateCreation | date:'dd/MM/yyyy' }}</td>
+              <td><a class="btn btn-danger" (click)="supprimeruniversite(universite)">Supprimer</a></td>
+              <td><a class="btn btn-success" [routerLink]="['/updateuniversite',universite.iduniversite]">Modifier</a></td>
+
+            </tr>
+            @if (last) {
+              <h1>Nombre : {{ nbr }}</h1>
+            }
+
+          } @empty {
+
+            <tr>
+              <td colspan="6">Aucune université trouvée !</td>
+            </tr>
+
+          }
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
